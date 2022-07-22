@@ -4,7 +4,8 @@ from django.db import models
 
 class User(AbstractUser):
     watchlist = models.ManyToManyField(
-        'AuctionListing', blank=True, related_name="userWatchlist")
+        "AuctionListing", blank=True, related_name="userWatchlist"
+    )
 
 
 class Category(models.Model):
@@ -32,8 +33,7 @@ class Bid(models.Model):
     date = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     bidValue = models.DecimalField(decimal_places=2, max_digits=7)
-    auctionListing = models.ForeignKey(
-        AuctionListing, on_delete=models.CASCADE)
+    auctionListing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.id} : {self.user.username} bid {self.bidValue} on {self.auctionListing.name} at {self.date}"
@@ -42,8 +42,7 @@ class Bid(models.Model):
 class Comment(models.Model):
     date = models.DateTimeField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    auctionListing = models.ForeignKey(
-        AuctionListing, on_delete=models.CASCADE)
+    auctionListing = models.ForeignKey(AuctionListing, on_delete=models.CASCADE)
     commentValue = models.CharField(max_length=250)
 
     def __str__(self):
